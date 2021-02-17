@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Min(0f)]
     [SerializeField]
+    private float jumpForce = 3f;
+
+    [Min(0f)]
+    [SerializeField]
     private float lookSensitivity = 5f;
 
     [Min(0f)]
@@ -20,11 +24,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float maxZangle = 30f;
 
-    [SerializeField]
     private GameObject camera;
 
     private Rigidbody rb;
 
+    private bool canJump;
+    private bool isGrounded = true;
     private Vector3 movementAxis;
     private Vector3 rotationAxis;
 
@@ -36,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        UpdateJump();
         UpdateMovementAxis();
         UpdateRotationAxis();
     }
@@ -44,6 +50,14 @@ public class PlayerMovement : MonoBehaviour
     {
         UpdatePosition();
         UpdateRotation();
+    }
+
+    private void UpdateJump()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            canJump = true;
+        }
     }
 
     private void UpdateMovementAxis()
@@ -70,8 +84,13 @@ public class PlayerMovement : MonoBehaviour
     private void UpdatePosition()
     {
         var posMovement = movementAxis * moveSpeed * Time.deltaTime;
-
         transform.position += transform.TransformDirection(posMovement);
+
+        if(canJump)
+        {
+            canJump = false;
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+        }
     }
 
     private void UpdateRotation()

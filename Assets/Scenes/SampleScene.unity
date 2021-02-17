@@ -603,11 +603,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f94e09e359c8548a825a45c9b08fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 8
+  jumpForce: 3
   lookSensitivity: 5
   maxYangle: 80
   maxZangle: 30
-  camera: {fileID: 963194225}
 --- !u!4 &1695755732
 Transform:
   m_ObjectHideFlags: 0
