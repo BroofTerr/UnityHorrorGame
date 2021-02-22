@@ -563,11 +563,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f94e09e359c8548a825a45c9b08fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveInputActionReference: {fileID: -6712243980487120316, guid: c7f9a1245b1b3864d96d583a9664f53e,
+    type: 3}
+  lookInputActionReference: {fileID: 8879279817478011858, guid: c7f9a1245b1b3864d96d583a9664f53e,
+    type: 3}
+  jumpInputActionReference: {fileID: -3480172042780164409, guid: c7f9a1245b1b3864d96d583a9664f53e,
+    type: 3}
+  tiltInputActionReference: {fileID: 5624442697966207043, guid: c7f9a1245b1b3864d96d583a9664f53e,
+    type: 3}
   moveSpeed: 8
   jumpForce: 3
-  lookSensitivity: 5
+  lookSensitivity: 0.3
   maxYangle: 80
   maxZangle: 30
+  tiltInput: 0
+  rotationAxis: {x: 0, y: 0, z: 0}
 --- !u!4 &1695755732
 Transform:
   m_ObjectHideFlags: 0

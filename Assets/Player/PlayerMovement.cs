@@ -1,9 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Input")]
+    [SerializeField]
+    private InputActionReference moveInputActionReference;
+
+    [SerializeField]
+    private InputActionReference lookInputActionReference;
+
+    [SerializeField]
+    private InputActionReference jumpInputActionReference;
+
+    [SerializeField]
+    private InputActionReference tiltInputActionReference;
+
+    [Header("Variables")]
     [Min(0f)]
     [SerializeField]
     private float moveSpeed = 8f;
@@ -14,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Min(0f)]
     [SerializeField]
-    private float lookSensitivity = 5f;
+    private float lookSensitivity = 0.3f;
 
     [Min(0f)]
     [SerializeField]
@@ -24,13 +37,66 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float maxZangle = 30f;
 
+    #region InputActions
+    private InputAction MoveInputAction
+    {
+        get
+        {
+            var action = moveInputActionReference.action;
+            if (!action.enabled) action.Enable();
+
+            return action;
+        }
+    }
+
+    private InputAction LookInputAction
+    {
+        get
+        {
+            var action = lookInputActionReference.action;
+            if (!action.enabled) action.Enable();
+
+            return action;
+        }
+    }
+
+    private InputAction JumpInputAction
+    {
+        get
+        {
+            var action = jumpInputActionReference.action;
+            if (!action.enabled) action.Enable();
+
+            return action;
+        }
+    }
+
+    private InputAction TiltInputAction
+    {
+        get
+        {
+            var action = tiltInputActionReference.action;
+            if (!action.enabled) action.Enable();
+
+            return action;
+        }
+    }
+    #endregion
+
     private GameObject camera;
 
     private Rigidbody rb;
 
     private bool canJump;
     private bool isGrounded = true;
+
+    private Vector2 moveInputAxis;
     private Vector3 movementAxis;
+
+    private Vector2 lookInputAxis;
+    [SerializeField]
+    private float tiltInput;
+    [SerializeField]
     private Vector3 rotationAxis;
 
     private Animator anim;
@@ -42,9 +108,80 @@ public class PlayerMovement : MonoBehaviour
         anim = gameObject.transform.Find("Stephen").GetComponent<Animator>();
     }
 
+    private void OnEnable()
+    {
+        MoveInputAction.performed += OnMovePerformed;
+        MoveInputAction.canceled += OnMoveCanceled;
+        
+        LookInputAction.performed += OnLookPerformed;
+        LookInputAction.canceled += OnLookCanceled;
+
+        JumpInputAction.performed += OnJumpPerformed;
+        JumpInputAction.canceled += OnJumpCanceled;
+
+        TiltInputAction.performed += OnTiltPerformed;
+        TiltInputAction.canceled += OnTiltCanceled;
+    }
+
+    private void OnDisable()
+    {
+        MoveInputAction.performed -= OnMovePerformed;
+        MoveInputAction.canceled -= OnMoveCanceled;
+
+        LookInputAction.performed -= OnLookPerformed;
+        LookInputAction.canceled -= OnLookCanceled;
+
+        JumpInputAction.performed -= OnJumpPerformed;
+        JumpInputAction.canceled -= OnJumpCanceled;
+
+        TiltInputAction.performed -= OnTiltPerformed;
+        TiltInputAction.canceled -= OnTiltCanceled;
+    }
+
+    #region InputEvents
+    private void OnMovePerformed(InputAction.CallbackContext ctx)
+    {
+        moveInputAxis = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnMoveCanceled(InputAction.CallbackContext ctx)
+    {
+        moveInputAxis = Vector2.zero;
+    }
+
+    private void OnLookPerformed(InputAction.CallbackContext ctx)
+    {
+        lookInputAxis = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnLookCanceled(InputAction.CallbackContext ctx)
+    {
+        lookInputAxis = Vector2.zero;
+    }
+
+    private void OnJumpPerformed(InputAction.CallbackContext ctx)
+    {
+        canJump = ctx.ReadValueAsButton();
+    }
+
+    private void OnJumpCanceled(InputAction.CallbackContext ctx)
+    {
+        canJump = false;
+    }
+
+    private void OnTiltPerformed(InputAction.CallbackContext ctx)
+    {
+        tiltInput = ctx.ReadValue<float>();
+    }
+
+    private void OnTiltCanceled(InputAction.CallbackContext ctx)
+    {
+        tiltInput = 0;
+    }
+    #endregion
+
     private void Update()
     {
-        UpdateJump();
         UpdateMovementAxis();
         UpdateRotationAxis();
     }
@@ -56,28 +193,19 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimations();
     }
 
-    private void UpdateJump()
-    {
-        if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            canJump = true;
-        }
-    }
-
     private void UpdateMovementAxis()
     {
-        movementAxis.x = Input.GetAxis("Horizontal");
-        movementAxis.z = Input.GetAxis("Vertical");
+        movementAxis = new Vector3(moveInputAxis.x, 0, moveInputAxis.y);
     }
 
     private void UpdateRotationAxis()
     {
-        rotationAxis.x += Input.GetAxis("Mouse X") * lookSensitivity;
-        rotationAxis.y -= Input.GetAxis("Mouse Y") * lookSensitivity;
+        rotationAxis.x += lookInputAxis.x * lookSensitivity;
+        rotationAxis.y -= lookInputAxis.y * lookSensitivity;
 
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
+        if (tiltInput != 0)
         {
-            rotationAxis.z -= Input.GetAxis("Tilt") * lookSensitivity;
+            rotationAxis.z -= tiltInput * lookSensitivity;
         }
         else
         {
@@ -90,9 +218,9 @@ public class PlayerMovement : MonoBehaviour
         var posMovement = movementAxis * moveSpeed * Time.deltaTime;
         transform.position += transform.TransformDirection(posMovement);
 
-        if(canJump)
+        if(canJump && isGrounded)
         {
-            canJump = false;
+            isGrounded = false;
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
         }
     }
