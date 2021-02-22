@@ -33,10 +33,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 movementAxis;
     private Vector3 rotationAxis;
 
+    private Animator anim;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         camera = gameObject.transform.Find("PlayerCamera").gameObject;
+        anim = gameObject.transform.Find("Stephen").GetComponent<Animator>();
     }
 
     private void Update()
@@ -50,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     {
         UpdatePosition();
         UpdateRotation();
+        UpdateAnimations();
     }
 
     private void UpdateJump()
@@ -111,5 +115,12 @@ public class PlayerMovement : MonoBehaviour
         rotationAxis.z = Mathf.Clamp(rotationAxis.z, -maxZangle, maxZangle);
 
         cameraTransform.rotation = Quaternion.Euler(rotationAxis.y, rotationAxis.x, rotationAxis.z);
+    }
+
+    private void UpdateAnimations()
+    {
+        anim.SetFloat("DirectionX", movementAxis.x);
+        anim.SetFloat("DirectionZ", movementAxis.z);
+        anim.SetFloat("Speed", movementAxis.magnitude);
     }
 }

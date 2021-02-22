@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 551c03f2bec80c145af1cb7a1eae7974
+guid: 400bc5cd0b865a447a9248ebb9bda019
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Forward_Walking
+    second: Left_Walking
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,18 +35,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Forward_Walking
+      name: Left_Walking
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 73
+      lastFrame: 88
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
