@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Min(0f)]
     [SerializeField]
-    private float maxZangle = 30f;
+    private float maxZangle = 15f;
 
     #region InputActions
     private InputAction MoveInputAction
@@ -94,9 +94,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 movementAxis;
 
     private Vector2 lookInputAxis;
-    [SerializeField]
     private float tiltInput;
-    [SerializeField]
     private Vector3 rotationAxis;
 
     private Animator anim;
