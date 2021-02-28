@@ -3,7 +3,11 @@ guid: f2f94e09e359c8548a825a45c9b08fcc
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - moveInputActionReference: {instanceID: 0}
+  - lookInputActionReference: {instanceID: 0}
+  - jumpInputActionReference: {instanceID: 0}
+  - tiltInputActionReference: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

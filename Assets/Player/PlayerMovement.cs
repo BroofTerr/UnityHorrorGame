@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     private InputActionReference moveInputActionReference;
 
     [SerializeField]
+    private InputActionReference runInputActionReference;
+
+    [SerializeField]
     private InputActionReference lookInputActionReference;
 
     [SerializeField]
@@ -16,10 +19,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private InputActionReference tiltInputActionReference;
 
+    [SerializeField]
+    private InputActionReference flashlightInputActionReference;
+
     [Header("Variables")]
     [Min(0f)]
     [SerializeField]
-    private float moveSpeed = 8f;
+    private float moveSpeed = 4f;
 
     [Min(0f)]
     [SerializeField]
@@ -81,11 +87,36 @@ public class PlayerMovement : MonoBehaviour
             return action;
         }
     }
+
+    private InputAction FlashlightInputAction
+    {
+        get
+        {
+            var action = flashlightInputActionReference.action;
+            if (!action.enabled) action.Enable();
+
+            return action;
+        }
+    }
+
+    private InputAction RunInputAction
+    {
+        get
+        {
+            var action = runInputActionReference.action;
+            if (!action.enabled) action.Enable();
+
+            return action;
+        }
+    }
     #endregion
 
     private GameObject camera;
 
     private Rigidbody rb;
+
+    private float walkSpeed = 4f;
+    private float runSpeed = 8f;
 
     private bool canJump;
     private bool isGrounded = true;
@@ -97,13 +128,17 @@ public class PlayerMovement : MonoBehaviour
     private float tiltInput;
     private Vector3 rotationAxis;
 
+    private bool flashlightEnabled = false;
+
     private Animator anim;
+    private GameObject flashlight;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         camera = gameObject.transform.Find("PlayerCamera").gameObject;
         anim = gameObject.transform.Find("Stephen").GetComponent<Animator>();
+        flashlight = gameObject.transform.Find("Flashlight").gameObject;
     }
 
     private void OnEnable()
@@ -119,6 +154,11 @@ public class PlayerMovement : MonoBehaviour
 
         TiltInputAction.performed += OnTiltPerformed;
         TiltInputAction.canceled += OnTiltCanceled;
+
+        FlashlightInputAction.performed += OnFlashlightPerformed;
+
+        RunInputAction.performed += OnRunPerformed;
+        RunInputAction.canceled += OnRunCanceled;
     }
 
     private void OnDisable()
@@ -134,6 +174,11 @@ public class PlayerMovement : MonoBehaviour
 
         TiltInputAction.performed -= OnTiltPerformed;
         TiltInputAction.canceled -= OnTiltCanceled;
+
+        FlashlightInputAction.performed -= OnFlashlightPerformed;
+
+        RunInputAction.performed -= OnRunPerformed;
+        RunInputAction.canceled -= OnRunCanceled;
     }
 
     #region InputEvents
@@ -176,6 +221,21 @@ public class PlayerMovement : MonoBehaviour
     {
         tiltInput = 0;
     }
+
+    private void OnFlashlightPerformed(InputAction.CallbackContext ctx)
+    {
+        flashlightEnabled = !flashlightEnabled;
+    }
+
+    private void OnRunPerformed(InputAction.CallbackContext ctx)
+    {
+        moveSpeed = runSpeed;
+    }
+
+    private void OnRunCanceled(InputAction.CallbackContext ctx)
+    {
+        moveSpeed = walkSpeed;
+    }
     #endregion
 
     private void Update()
@@ -188,6 +248,7 @@ public class PlayerMovement : MonoBehaviour
     {
         UpdatePosition();
         UpdateRotation();
+        UpdateFlashlight();
         UpdateAnimations();
     }
 
@@ -241,6 +302,13 @@ public class PlayerMovement : MonoBehaviour
         rotationAxis.z = Mathf.Clamp(rotationAxis.z, -maxZangle, maxZangle);
 
         cameraTransform.rotation = Quaternion.Euler(rotationAxis.y, rotationAxis.x, rotationAxis.z);
+    }
+
+    private void UpdateFlashlight()
+    {
+        flashlight.transform.rotation = camera.transform.rotation;
+
+        flashlight.SetActive(flashlightEnabled);
     }
 
     private void UpdateAnimations()
