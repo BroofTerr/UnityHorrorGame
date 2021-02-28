@@ -68,6 +68,8 @@ public class InventoryController : MonoBehaviour
         if (inventoryEnabled)
             Debug.Log("Inventory Opened");
         else Debug.Log("Inventory Closed");
+
+        // Later implement an interactible interface
     }
 
     public void AddToInventory(GameObject item)

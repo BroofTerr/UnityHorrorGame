@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 class Player : MonoBehaviour
 {
@@ -23,8 +21,6 @@ class Player : MonoBehaviour
     private float health = 70f;
 
     private float maxHealth = 100f;
-
-    //The notification will be shown for X seconds
     
     private float currentNotifyTime = 0f;
     private bool showNotification = false;
@@ -49,11 +45,17 @@ class Player : MonoBehaviour
 
     private void Update()
     {
-        if(showNotification)
+        UpdateNotification();
+        
+    }
+
+    private void UpdateNotification()
+    {
+        if (showNotification)
         {
-            if(currentNotifyTime >= notifyLength)
+            if (currentNotifyTime >= notifyLength)
             {
-                currentNotifyTime = 0;
+                currentNotifyTime = 0f;
                 showNotification = false;
                 notifyText.text = "";
                 notifyText.enabled = false;
@@ -63,6 +65,11 @@ class Player : MonoBehaviour
                 currentNotifyTime += Time.deltaTime;
             }
         }
+    }
+
+    public bool NeedsHealth()
+    {
+        return health < maxHealth;
     }
 
     public void AddHealth(float amount)

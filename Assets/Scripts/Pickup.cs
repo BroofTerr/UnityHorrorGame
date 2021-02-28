@@ -27,14 +27,14 @@ public abstract class Pickup : MonoBehaviour
     private void OnPickup()
     {
         // Show via UI
-        Debug.Log("You picked up a " + type);
         Player.Instance.SetNotificationText($"You picked up a {type}");
 
         // Add to player inventory
         InventoryController.Instance.AddToInventory(gameObject);
 
         // For testing purposes:
-        Activate();
+        if (Player.Instance.NeedsHealth())
+            Activate();
         // Normally player will activate it via inventory interface
     }
 
