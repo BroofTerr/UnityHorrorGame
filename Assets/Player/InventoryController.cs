@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class InventoryController : MonoBehaviour
 {
+    public static InventoryController Instance { get; private set; }
+
     [Header("Input")]
     [SerializeField]
     private InputActionReference inventoryInputActionReference;
@@ -14,6 +16,20 @@ public class InventoryController : MonoBehaviour
 
     private bool inventoryEnabled = false;
     private PlayerController playerController;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        playerController = GetComponent<PlayerController>();
+    }
 
     #region InputActions
     private InputAction InventoryInputAction
@@ -47,11 +63,6 @@ public class InventoryController : MonoBehaviour
         ShowInventory();
     }
 
-    private void Awake()
-    {
-        playerController = GetComponent<PlayerController>();
-    }
-
     private void ShowInventory()
     {
         if (inventoryEnabled)
@@ -66,6 +77,6 @@ public class InventoryController : MonoBehaviour
 
     public void RemoveFromInventory(GameObject item)
     {
-
+        inventory.Remove(item);
     }
 }

@@ -19,24 +19,30 @@ public abstract class Pickup : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            OnPickup(other.gameObject);
+            OnPickup();
             gameObject.SetActive(false);
         }
     }
 
-    private void OnPickup(GameObject player)
+    private void OnPickup()
     {
-        Debug.Log("You picked up a " + type);
         // Show via UI
-        // Add to player inventory
-        player.GetComponent<InventoryController>().AddToInventory(gameObject);
+        Debug.Log("You picked up a " + type);
+        Player.Instance.SetNotificationText($"You picked up a {type}");
 
+        // Add to player inventory
+        InventoryController.Instance.AddToInventory(gameObject);
+
+        // For testing purposes:
+        Activate();
+        // Normally player will activate it via inventory interface
     }
 
     //Once player presses on the item in the inventory, this method activates
     public void Activate()
     {
         ActivatePickup();
+        InventoryController.Instance.RemoveFromInventory(gameObject);
         Destroy(gameObject);
     }
 }

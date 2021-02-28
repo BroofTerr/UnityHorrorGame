@@ -9,8 +9,6 @@ public class Medkit : Pickup
 
     public override void ActivatePickup()
     {
-        Debug.Log("Healing for " + healValue);
-        //Heal the player
-        //Update the UI
+        Player.Instance.AddHealth(healValue);
     }
 }
