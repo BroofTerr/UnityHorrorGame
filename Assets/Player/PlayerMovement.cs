@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
-    private GameObject camera;
+    private new GameObject camera;
 
     private Rigidbody rb;
 
@@ -313,8 +313,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimations()
     {
-        anim.SetFloat("DirectionX", movementAxis.x);
-        anim.SetFloat("DirectionZ", movementAxis.z);
         anim.SetFloat("Speed", movementAxis.magnitude);
     }
 

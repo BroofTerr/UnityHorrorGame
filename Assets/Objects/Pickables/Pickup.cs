@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+enum PickupType
+{
+    Medkit,
+    Key
+};
+
 public class Pickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private PickupType type;
+
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if(other.gameObject.tag == "Player")
+        {
+            OnPickup();
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnPickup()
     {
-        
+        Debug.Log("You picked up a " + type);
     }
 }
