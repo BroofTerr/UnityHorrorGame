@@ -13,7 +13,6 @@ public class Pickup : MonoBehaviour
     [SerializeField]
     private PickupType type;
 
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")

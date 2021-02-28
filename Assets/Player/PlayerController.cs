@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [Header("Input")]
     [SerializeField]
@@ -21,6 +21,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private InputActionReference flashlightInputActionReference;
+
+    [SerializeField]
+    private InputActionReference actionInputActionReference;
+
+    [SerializeField]
+    private InputActionReference inventoryInputActionReference;
 
     [Header("Variables")]
     [Min(0f)]
@@ -109,6 +115,28 @@ public class PlayerMovement : MonoBehaviour
             return action;
         }
     }
+
+    private InputAction ActionInputAction
+    {
+        get
+        {
+            var action = actionInputActionReference.action;
+            if (!action.enabled) action.Enable();
+
+            return action;
+        }
+    }
+
+    private InputAction InventoryInputAction
+    {
+        get
+        {
+            var action = inventoryInputActionReference.action;
+            if (!action.enabled) action.Enable();
+
+            return action;
+        }
+    }
     #endregion
 
     private new GameObject camera;
@@ -129,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 rotationAxis;
 
     private bool flashlightEnabled = false;
+    private bool inventoryEnabled = false;
 
     private Animator anim;
     private GameObject flashlight;
@@ -159,6 +188,10 @@ public class PlayerMovement : MonoBehaviour
 
         RunInputAction.performed += OnRunPerformed;
         RunInputAction.canceled += OnRunCanceled;
+
+        ActionInputAction.performed += OnActionPerformed;
+
+        InventoryInputAction.performed += OnInventoryPerformed;
     }
 
     private void OnDisable()
@@ -179,6 +212,10 @@ public class PlayerMovement : MonoBehaviour
 
         RunInputAction.performed -= OnRunPerformed;
         RunInputAction.canceled -= OnRunCanceled;
+
+        ActionInputAction.performed -= OnActionPerformed;
+
+        InventoryInputAction.performed -= OnInventoryPerformed;
     }
 
     #region InputEvents
@@ -236,6 +273,16 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = walkSpeed;
     }
+
+    private void OnActionPerformed(InputAction.CallbackContext ctx)
+    {
+        //send a ray
+    }
+
+    private void OnInventoryPerformed(InputAction.CallbackContext ctx)
+    {
+        inventoryEnabled = !inventoryEnabled;
+    }
     #endregion
 
     private void Update()
@@ -248,8 +295,13 @@ public class PlayerMovement : MonoBehaviour
     {
         UpdatePosition();
         UpdateRotation();
+
         UpdateFlashlight();
+
+        ShowInventory();
+
         UpdateAnimations();
+
     }
 
     private void UpdateMovementAxis()
@@ -309,6 +361,12 @@ public class PlayerMovement : MonoBehaviour
         flashlight.transform.rotation = camera.transform.rotation;
 
         flashlight.SetActive(flashlightEnabled);
+    }
+
+    private void ShowInventory()
+    {
+        if (inventoryEnabled)
+            Debug.Log("Inventory Open");
     }
 
     private void UpdateAnimations()
