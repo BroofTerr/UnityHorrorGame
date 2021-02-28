@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3206949128833745207}
   - component: {fileID: 7858474449856968407}
   - component: {fileID: 6163750344802875110}
-  - component: {fileID: 5585474080800783240}
+  - component: {fileID: 789823116690976456}
   m_Layer: 0
   m_Name: BlueBarrel
   m_TagString: Untagged
@@ -80,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5585474080800783240
-MeshCollider:
+--- !u!65 &789823116690976456
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +90,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6310891550343035600, guid: 2b4ad2330e928cb4d971bf104e27ce45, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.0707645, y: 1.0707641, z: 1.6363877}
+  m_Center: {x: -0.016383795, y: -0.0038651205, z: 0.8228546}
