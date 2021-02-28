@@ -545,6 +545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1695755732}
   - component: {fileID: 1695755730}
+  - component: {fileID: 1695755729}
   - component: {fileID: 1695755733}
   - component: {fileID: 1695755728}
   m_Layer: 0
@@ -567,6 +568,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.8181171, z: 0.7038073}
   m_Center: {x: 0, y: 1.3015366, z: 0.07404813}
+--- !u!114 &1695755729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695755727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddc0a555cf199a49b0aa2853a1f6d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryInputActionReference: {fileID: 2749079272809615730, guid: c7f9a1245b1b3864d96d583a9664f53e,
+    type: 3}
+  inventory: []
 --- !u!114 &1695755730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,8 +608,6 @@ MonoBehaviour:
   flashlightInputActionReference: {fileID: -6565401089627962686, guid: c7f9a1245b1b3864d96d583a9664f53e,
     type: 3}
   actionInputActionReference: {fileID: 727328754631925610, guid: c7f9a1245b1b3864d96d583a9664f53e,
-    type: 3}
-  inventoryInputActionReference: {fileID: 2749079272809615730, guid: c7f9a1245b1b3864d96d583a9664f53e,
     type: 3}
   moveSpeed: 4
   jumpForce: 3
@@ -4697,7 +4711,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medkit
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7658808739513238572, guid: f62447edd2bf7d548b0194915eefd58f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f62447edd2bf7d548b0194915eefd58f, type: 3}
 --- !u!4 &7417889001330203813
 Transform:

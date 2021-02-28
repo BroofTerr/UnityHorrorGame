@@ -25,9 +25,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private InputActionReference actionInputActionReference;
 
-    [SerializeField]
-    private InputActionReference inventoryInputActionReference;
-
     [Header("Variables")]
     [Min(0f)]
     [SerializeField]
@@ -126,17 +123,6 @@ public class PlayerController : MonoBehaviour
             return action;
         }
     }
-
-    private InputAction InventoryInputAction
-    {
-        get
-        {
-            var action = inventoryInputActionReference.action;
-            if (!action.enabled) action.Enable();
-
-            return action;
-        }
-    }
     #endregion
 
     private new GameObject camera;
@@ -157,7 +143,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 rotationAxis;
 
     private bool flashlightEnabled = false;
-    private bool inventoryEnabled = false;
 
     private Animator anim;
     private GameObject flashlight;
@@ -191,7 +176,7 @@ public class PlayerController : MonoBehaviour
 
         ActionInputAction.performed += OnActionPerformed;
 
-        InventoryInputAction.performed += OnInventoryPerformed;
+        
     }
 
     private void OnDisable()
@@ -215,7 +200,7 @@ public class PlayerController : MonoBehaviour
 
         ActionInputAction.performed -= OnActionPerformed;
 
-        InventoryInputAction.performed -= OnInventoryPerformed;
+        
     }
 
     #region InputEvents
@@ -278,11 +263,6 @@ public class PlayerController : MonoBehaviour
     {
         //send a ray
     }
-
-    private void OnInventoryPerformed(InputAction.CallbackContext ctx)
-    {
-        inventoryEnabled = !inventoryEnabled;
-    }
     #endregion
 
     private void Update()
@@ -297,8 +277,6 @@ public class PlayerController : MonoBehaviour
         UpdateRotation();
 
         UpdateFlashlight();
-
-        ShowInventory();
 
         UpdateAnimations();
 
@@ -361,12 +339,6 @@ public class PlayerController : MonoBehaviour
         flashlight.transform.rotation = camera.transform.rotation;
 
         flashlight.SetActive(flashlightEnabled);
-    }
-
-    private void ShowInventory()
-    {
-        if (inventoryEnabled)
-            Debug.Log("Inventory Open");
     }
 
     private void UpdateAnimations()
