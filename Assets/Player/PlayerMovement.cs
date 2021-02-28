@@ -317,4 +317,12 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("DirectionZ", movementAxis.z);
         anim.SetFloat("Speed", movementAxis.magnitude);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+    }
 }
