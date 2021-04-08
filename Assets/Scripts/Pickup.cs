@@ -35,10 +35,9 @@ public abstract class Pickup : MonoBehaviour
         // For testing purposes:
         if (Player.Instance.NeedsHealth())
             Activate();
-        // Normally player will activate it via inventory interface
+        // Normally player will activate it via inventory interface later on in development
     }
 
-    //Once player presses on the item in the inventory, this method activates
     public void Activate()
     {
         ActivatePickup();

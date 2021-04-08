@@ -322,7 +322,16 @@ public class PlayerController : MonoBehaviour
 
         rotationAxis.x = Mathf.Repeat(rotationAxis.x, 360);
 
-        playerTransform.rotation = Quaternion.Euler(0, rotationAxis.x, 0);
+        if (tiltInput != 0)
+        {
+            playerTransform.rotation = Quaternion.Euler(Mathf.Abs(rotationAxis.z), rotationAxis.x + rotationAxis.z, rotationAxis.z);
+        }
+        else
+        {
+            playerTransform.rotation = Quaternion.Euler(0, rotationAxis.x, 0);
+        }
+
+        
 
         // Camera Rotation Part
 
@@ -331,7 +340,8 @@ public class PlayerController : MonoBehaviour
         rotationAxis.y = Mathf.Clamp(rotationAxis.y, -maxYangle, maxYangle);
         rotationAxis.z = Mathf.Clamp(rotationAxis.z, -maxZangle, maxZangle);
 
-        cameraTransform.rotation = Quaternion.Euler(rotationAxis.y, rotationAxis.x, rotationAxis.z);
+        cameraTransform.rotation = Quaternion.Euler(rotationAxis.y, rotationAxis.x + rotationAxis.z, rotationAxis.z);
+
     }
 
     private void UpdateFlashlight()

@@ -54,7 +54,6 @@ public class InventoryController : MonoBehaviour
         InventoryInputAction.performed -= OnInventoryPerformed;
     }
 
-    //When inventory is open, control is taken away until the inventory is closed 
     private void OnInventoryPerformed(InputAction.CallbackContext ctx)
     {
         inventoryEnabled = !inventoryEnabled;
@@ -69,7 +68,6 @@ public class InventoryController : MonoBehaviour
             Debug.Log("Inventory Opened");
         else Debug.Log("Inventory Closed");
 
-        // Later implement an interactible interface
     }
 
     public void AddToInventory(GameObject item)
