@@ -21,7 +21,7 @@ namespace DigitalRuby.PyroParticles
         private float lightIntensity;
         private float seed;
         private FireBaseScript fireBaseScript;
-        private float baseY;
+        private float baseY = 0f;
 
         private void Awake()
         {
@@ -32,7 +32,7 @@ namespace DigitalRuby.PyroParticles
                 // we have a point light, set the intensity to 0 so it can fade in nicely
                 lightIntensity = firePointLight.intensity;
                 firePointLight.intensity = 0.0f;
-                baseY = firePointLight.gameObject.transform.position.y;
+                //baseY = firePointLight.gameObject.transform.position.y;
             }
             seed = UnityEngine.Random.value * Seed;
             fireBaseScript = gameObject.GetComponent<FireBaseScript>();

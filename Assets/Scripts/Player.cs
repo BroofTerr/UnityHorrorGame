@@ -6,6 +6,13 @@ class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
+    [SerializeField]
+    private Camera camera;
+
+    [Header("Interaction")]
+    [SerializeField]
+    private LayerMask layerMask;
+
     [Header("UI")]
     [SerializeField]
     private TextMeshProUGUI healthText;
@@ -16,6 +23,9 @@ class Player : MonoBehaviour
     [SerializeField]
     private float notifyLength = 1f;
 
+    [SerializeField]
+    private TextMeshProUGUI interactText;
+
     [Header("Stats")]
     [SerializeField]
     private float health = 70f;
@@ -24,6 +34,8 @@ class Player : MonoBehaviour
     
     private float currentNotifyTime = 0f;
     private bool showNotification = false;
+
+    private Interactable interactionObject;
 
     private void Awake()
     {
@@ -40,13 +52,14 @@ class Player : MonoBehaviour
     private void Start()
     {
         notifyText.text = "";
+        interactText.text = "";
         UpdateHealthText();
     }
 
     private void Update()
     {
         UpdateNotification();
-        
+        UpdateInteraction();
     }
 
     private void UpdateNotification()
@@ -64,6 +77,34 @@ class Player : MonoBehaviour
             {
                 currentNotifyTime += Time.deltaTime;
             }
+        }
+    }
+
+    private void UpdateInteraction()
+    {
+        Ray ray = camera.ViewportPointToRay(Vector3.one / 2f);
+        Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo, 2f, layerMask))
+        {
+            var hitItem = hitInfo.collider.GetComponent<Interactable>();
+
+            if (hitItem == null)
+            {
+                interactText.text = "";
+                interactionObject = null;
+            }
+            else if (hitItem != null && hitItem != interactionObject)
+            {
+                interactionObject = hitItem;
+                interactText.text = interactionObject.interactionText;
+            }
+        }
+        else
+        {
+            interactText.text = "";
+            interactionObject = null;
         }
     }
 
