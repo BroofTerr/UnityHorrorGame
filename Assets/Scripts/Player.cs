@@ -93,18 +93,30 @@ class Player : MonoBehaviour
             if (hitItem == null)
             {
                 interactText.text = "";
+                if (interactionObject != null) interactionObject.isFocused = false;
                 interactionObject = null;
             }
             else if (hitItem != null && hitItem != interactionObject)
             {
+                if (interactionObject != null) interactionObject.isFocused = false;
                 interactionObject = hitItem;
                 interactText.text = interactionObject.interactionText;
+                interactionObject.isFocused = true;
             }
         }
         else
         {
             interactText.text = "";
+            if (interactionObject != null) interactionObject.isFocused = false;
             interactionObject = null;
+        }
+    }
+
+    public void Interact()
+    {
+        if (interactionObject != null)
+        {
+            interactionObject.Interact();
         }
     }
 
@@ -129,6 +141,7 @@ class Player : MonoBehaviour
     {
         notifyText.text = notification;
         showNotification = true;
+        currentNotifyTime = 0f;
         notifyText.enabled = true;
     }
 

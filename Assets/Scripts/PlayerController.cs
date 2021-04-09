@@ -146,6 +146,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
     private GameObject flashlight;
+    private Player playerScript;
 
     private void Awake()
     {
@@ -153,6 +154,7 @@ public class PlayerController : MonoBehaviour
         camera = gameObject.transform.Find("PlayerCamera").gameObject;
         anim = gameObject.transform.Find("Stephen").GetComponent<Animator>();
         flashlight = gameObject.transform.Find("Flashlight").gameObject;
+        playerScript = gameObject.GetComponent<Player>();
     }
 
     private void OnEnable()
@@ -261,7 +263,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnActionPerformed(InputAction.CallbackContext ctx)
     {
-        //send a ray
+        playerScript.Interact();
     }
     #endregion
 
