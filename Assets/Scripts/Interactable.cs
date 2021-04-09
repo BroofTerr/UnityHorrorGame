@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
+    [Header("Hover info")]
+    public string primaryText = "";
+    public string secondaryText = "";
     public string interactionText = "";
     public bool isFocused = false;
 
@@ -19,6 +22,7 @@ public class Interactable : MonoBehaviour
     private void Start()
     {
         outline = gameObject.GetComponent<Outline>();
+        SetInteractionText();
     }
 
     private void Update()
@@ -29,7 +33,21 @@ public class Interactable : MonoBehaviour
     public void Interact()
     {
         isActive = !isActive;
+        SetInteractionText();
         onInteraction.Invoke();
+    }
+
+    private void SetInteractionText()
+    {
+        if (isActive)
+        {
+            interactionText = secondaryText;
+        }
+        else
+        {
+            interactionText = primaryText;
+        }
+        Player.Instance.UpdateInteractionText(interactionText);
     }
 
     public void PlayAnimation()

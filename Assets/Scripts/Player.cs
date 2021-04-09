@@ -112,6 +112,11 @@ class Player : MonoBehaviour
         }
     }
 
+    public void UpdateInteractionText(string text)
+    {
+        interactText.text = text;
+    }
+
     public void Interact()
     {
         if (interactionObject != null)

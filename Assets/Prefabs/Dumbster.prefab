@@ -109,7 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0299d7b15051c5d4295957870470317e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Open
+  primaryText: Open
+  secondaryText: Close
+  interactionText: 
   isFocused: 0
   isActive: 0
   onInteraction:
@@ -564,7 +566,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0299d7b15051c5d4295957870470317e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: Open
+  primaryText: Open
+  secondaryText: Close
+  interactionText: 
   isFocused: 0
   isActive: 0
   onInteraction:
