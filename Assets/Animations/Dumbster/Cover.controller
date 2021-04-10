@@ -40,7 +40,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isOpen
+    m_ConditionEvent: isActivated
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1189929973863419550}
@@ -114,7 +114,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isOpen
+    m_ConditionEvent: isActivated
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5321800701103600887}
@@ -188,7 +188,7 @@ AnimatorController:
   m_Name: Cover
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: isOpen
+  - m_Name: isActivated
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

@@ -1,5 +1,93 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2545313519238132724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2335723489656250519}
+  - component: {fileID: 5454371476979578084}
+  m_Layer: 0
+  m_Name: SideCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2335723489656250519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2545313519238132724}
+  m_LocalRotation: {x: 0, y: 0, z: -0.11302984, w: 0.9935916}
+  m_LocalPosition: {x: -19.86, y: 6.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7337611942974644370}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -12.98}
+--- !u!65 &5454371476979578084
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2545313519238132724}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.19, y: 9.554035, z: 11.5}
+  m_Center: {x: 0.000000010181195, y: 0.2770159, z: -1.4000001}
+--- !u!1 &6884061663128696066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5054107214273480697}
+  - component: {fileID: 6651846147393763326}
+  m_Layer: 0
+  m_Name: DiagonalCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5054107214273480697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884061663128696066}
+  m_LocalRotation: {x: 0, y: 0, z: -0.4309048, w: 0.90239745}
+  m_LocalPosition: {x: -19.91, y: 1.34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7337611942974644370}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -51.05}
+--- !u!65 &6651846147393763326
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884061663128696066}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.21, y: 1.11, z: 11.5}
+  m_Center: {x: 0, y: 0, z: -1.4}
 --- !u!1 &7971300435000212008
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +99,7 @@ GameObject:
   - component: {fileID: 7337611942974644370}
   - component: {fileID: 5943542847803617079}
   - component: {fileID: 8475567735709178877}
-  - component: {fileID: 5600793061033161073}
+  - component: {fileID: 5508661634534298380}
   m_Layer: 0
   m_Name: building12
   m_TagString: Untagged
@@ -29,7 +117,9 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 193.51, y: 19.414902, z: -144.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5054107214273480697}
+  - {fileID: 2335723489656250519}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
@@ -80,8 +170,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5600793061033161073
-MeshCollider:
+--- !u!65 &5508661634534298380
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +180,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2212009239438826721, guid: 8ffaa7997e3124b4e81ef837ec307b23, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 27, y: 1, z: 11.5}
+  m_Center: {x: -5.91, y: -5.6843466e-15, z: -1.4000001}

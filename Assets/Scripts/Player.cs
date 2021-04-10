@@ -86,7 +86,7 @@ class Player : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
         RaycastHit hitInfo;
 
-        if (Physics.Raycast(ray, out hitInfo, 2f, layerMask))
+        if (Physics.Raycast(ray, out hitInfo, 3f, layerMask))
         {
             var hitItem = hitInfo.collider.GetComponent<Interactable>();
 

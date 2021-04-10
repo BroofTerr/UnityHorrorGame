@@ -14,14 +14,20 @@ public class Interactable : MonoBehaviour
     [SerializeField]
     private bool isActive = false;
 
+    [Header("Additional stuff")]
+    [SerializeField]
+    private AudioClip clip;
+
     [SerializeField]
     private UnityEvent onInteraction;
 
+    [SerializeField]
     private Outline outline;
 
     private void Start()
     {
-        outline = gameObject.GetComponent<Outline>();
+        if (outline == null)
+            outline = gameObject.GetComponent<Outline>();
         SetInteractionText();
     }
 
@@ -50,9 +56,25 @@ public class Interactable : MonoBehaviour
         Player.Instance.UpdateInteractionText(interactionText);
     }
 
-    public void PlayAnimation()
+    // Used for toggle-able objects (such as doors, covers)
+    public void PlayOpenCloseAnimation()
     {
         Animator animator = GetComponent<Animator>();
-        animator.SetBool("isOpen", isActive);
+        animator.SetBool("isActivated", isActive);
+    }
+
+    // Plays the animation and immidiatelly deactivates the object
+    public void PlayOneShotAnimation(string name)
+    {
+        Animator animator = GetComponent<Animator>();
+        animator.Play(name);
+        isActive = false;
+    }
+
+    public void PlaySound()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 }

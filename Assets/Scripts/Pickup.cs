@@ -20,11 +20,10 @@ public abstract class Pickup : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             OnPickup();
-            gameObject.SetActive(false);
         }
     }
 
-    private void OnPickup()
+    public void OnPickup()
     {
         // Show via UI
         Player.Instance.SetNotificationText($"You picked up a {type}");
@@ -36,6 +35,7 @@ public abstract class Pickup : MonoBehaviour
         if (Player.Instance.NeedsHealth())
             Activate();
         // Normally player will activate it via inventory interface later on in development
+        gameObject.SetActive(false);
     }
 
     public void Activate()

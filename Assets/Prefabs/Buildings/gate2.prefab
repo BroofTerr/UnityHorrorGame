@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7886655993341503588}
   - component: {fileID: 6547350136242857921}
   - component: {fileID: 9023009182244967179}
-  - component: {fileID: 4980254848690895239}
+  - component: {fileID: 2283624600019753742}
+  - component: {fileID: 5984815786867447664}
   m_Layer: 0
   m_Name: gate2
   m_TagString: Untagged
@@ -80,8 +81,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4980254848690895239
-MeshCollider:
+--- !u!65 &2283624600019753742
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +91,19 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1353746659569323740, guid: 03f74afee9d3bb84a88a1794c0010826, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.097786, y: 1.2715994, z: 3.120608}
+  m_Center: {x: -0.5612068, y: -3.9521399, z: 0.36481467}
+--- !u!65 &5984815786867447664
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7365874116771132126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.097786, y: 1.2715994, z: 3.120608}
+  m_Center: {x: 4.28, y: -3.9521399, z: 0.36481467}

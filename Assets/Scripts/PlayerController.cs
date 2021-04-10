@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private Texture2D crosshair;
+
     [Header("Input")]
     [SerializeField]
     private InputActionReference moveInputActionReference;
@@ -29,6 +32,14 @@ public class PlayerController : MonoBehaviour
     [Min(0f)]
     [SerializeField]
     private float moveSpeed = 4f;
+
+    [Min(0f)]
+    [SerializeField]
+    private float walkSpeed = 2f;
+
+    [Min(0f)]
+    [SerializeField]
+    private float runSpeed = 8f;
 
     [Min(0f)]
     [SerializeField]
@@ -129,8 +140,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
-    private float walkSpeed = 4f;
-    private float runSpeed = 8f;
+    
 
     private bool canJump;
     private bool isGrounded = true;
@@ -155,6 +165,9 @@ public class PlayerController : MonoBehaviour
         anim = gameObject.transform.Find("Stephen").GetComponent<Animator>();
         flashlight = gameObject.transform.Find("Flashlight").gameObject;
         playerScript = gameObject.GetComponent<Player>();
+
+        Cursor.SetCursor(crosshair, new Vector2(crosshair.width / 2, crosshair.height / 2), CursorMode.Auto);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnEnable()
